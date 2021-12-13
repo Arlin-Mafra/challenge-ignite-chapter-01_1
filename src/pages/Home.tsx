@@ -58,6 +58,19 @@ export function Home() {
     );
   }
 
+  function handleEditTask(taskId: number, taskNewTitle: string) {
+    const taskUpdated = tasks.map((task) => ({ ...task }));
+
+    const taskFound = taskUpdated.find((item) => item.id === taskId);
+
+    if (!taskFound) {
+      return;
+    } else {
+      taskFound.title = taskNewTitle;
+      setTasks(taskUpdated);
+    }
+  }
+
   return (
     <View style={styles.container}>
       <Header tasksCounter={tasks.length} />
@@ -68,6 +81,7 @@ export function Home() {
         tasks={tasks}
         toggleTaskDone={handleToggleTaskDone}
         removeTask={handleRemoveTask}
+        editTask={handleEditTask}
       />
     </View>
   );
